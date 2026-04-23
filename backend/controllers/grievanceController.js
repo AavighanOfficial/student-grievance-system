@@ -23,7 +23,7 @@ exports.createGrievance = async (req, res) => {
 // Get all grievances
 exports.getGrievances = async (req, res) => {
   try {
-    const grievances = await Grievance.find()
+    const grievances = await Grievance.find({ user: req.user.id })
       .populate('user', ['name', 'email'])
       .sort({ date: -1 });
     res.json(grievances);
